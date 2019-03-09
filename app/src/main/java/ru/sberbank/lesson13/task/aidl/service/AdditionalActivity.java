@@ -14,19 +14,19 @@ import android.os.RemoteException;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static ru.sberbank.lesson13.task.aidl.service.ExampleService.MSG_SET_VALUE_FIELD;
+//import static ru.sberbank.lesson13.task.aidl.service.RemoteService.MSG_SET_VALUE_FIELD;
 
 public class AdditionalActivity extends Activity {
-    private Messenger mService = null;
+    /*private Messenger mService = null;
     private boolean mIsBound;
     private TextView mCallbackText;
-    private final Messenger mMessenger = new Messenger(new IncomingHandler());
+    private final Messenger mMessenger = new Messenger(new IncomingHandler());*/
 
-    class IncomingHandler extends Handler {
+    /*class IncomingHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case ExampleService.MSG_SET_VALUE:
+                case RemoteService.MSG_SET_VALUE:
                     mCallbackText.append("Received from service: " + msg.getData().getString(MSG_SET_VALUE_FIELD) + " \n");
                     break;
                 default:
@@ -42,12 +42,12 @@ public class AdditionalActivity extends Activity {
             mCallbackText.append("Attached\n");
             try {
                 Message msg = Message.obtain(null,
-                        ExampleService.MSG_REGISTER_CLIENT);
+                        RemoteService.MSG_REGISTER_CLIENT);
                 msg.replyTo = mMessenger;
                 mService.send(msg);
 
                 msg = Message.obtain(null,
-                        ExampleService.MSG_SET_VALUE, 0, 0);
+                        RemoteService.MSG_SET_VALUE, 0, 0);
                 Bundle data = new Bundle();
                 data.putString(MSG_SET_VALUE_FIELD, getResources().getString(R.string.hello_from_activity));
                 msg.setData(data);
@@ -70,7 +70,7 @@ public class AdditionalActivity extends Activity {
 
     void doBindService() {
         bindService(new Intent(AdditionalActivity.this,
-                ExampleService.class), mConnection, Context.BIND_AUTO_CREATE);
+                RemoteService.class), mConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
         mCallbackText.append("Binding\n");
     }
@@ -80,7 +80,7 @@ public class AdditionalActivity extends Activity {
             if (mService != null) {
                 try {
                     Message msg = Message.obtain(null,
-                            ExampleService.MSG_UNREGISTER_CLIENT);
+                            RemoteService.MSG_UNREGISTER_CLIENT);
                     msg.replyTo = mMessenger;
                     mService.send(msg);
                 } catch (RemoteException e) {
@@ -107,5 +107,5 @@ public class AdditionalActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         doUnbindService();
-    }
+    }*/
 }

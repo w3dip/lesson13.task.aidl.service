@@ -7,28 +7,31 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        intent = new Intent(MainActivity.this,
+                RemoteService.class);
         Button button = findViewById(R.id.startService);
-        button.setOnClickListener(mStartListener);
-        button = findViewById(R.id.startAdditionalActivity);
-        button.setOnClickListener(mStartAdditionalActivityListener);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startService(intent);
+            }
+        });
+        button = findViewById(R.id.stopService);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                stopService(intent);
+            }
+        });
     }
 
-    private View.OnClickListener mStartListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            startService(new Intent(MainActivity.this,
-                    ExampleService.class));
-        }
-    };
-
-    private View.OnClickListener mStartAdditionalActivityListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            startActivity(new Intent(MainActivity.this, AdditionalActivity.class));
-        }
-    };
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(intent);
+    }
 }

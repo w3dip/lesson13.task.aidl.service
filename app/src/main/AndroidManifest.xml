@@ -16,9 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ru.sberbank.lesson13.task.aidl.service.AdditionalActivity"></activity>
-
-        <service android:name="ru.sberbank.lesson13.task.aidl.service.ExampleService" android:enabled="true"/>
+        <!--<activity android:name="ru.sberbank.lesson13.task.aidl.service.AdditionalActivity"></activity>-->
+        <service
+            android:name="ru.sberbank.lesson13.task.aidl.service.RemoteService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ru.sberbank.lesson13.task.aidl.REMOTE_SERVICE_CALL" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
