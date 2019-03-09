@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name="ru.sberbank.lesson13.task.aidl.service.AdditionalActivity"></activity>-->
         <service
             android:name="ru.sberbank.lesson13.task.aidl.service.RemoteService"
             android:enabled="true"
